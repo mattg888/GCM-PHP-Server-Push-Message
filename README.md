@@ -1,3 +1,6 @@
+Google Cloud Push Messaging PHP Server Class
+--------------------------------------------
+
 A PHP class to send messages to devices registered through Google Cloud Messaging.
 
 See:
