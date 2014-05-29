@@ -72,7 +72,7 @@ class GCMPushMessage {
 				$fields['data'][$key] = $value;
 			}
 		}
-		
+
 		$headers = array( 
 			'Authorization: key=' . $this->serverApiKey,
 			'Content-Type: application/json'
@@ -105,5 +105,3 @@ class GCMPushMessage {
 		exit(1);
 	}
 }
-	
-?>
