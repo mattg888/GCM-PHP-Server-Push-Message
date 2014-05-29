@@ -18,6 +18,5 @@ $message = "The message to send";
 
 $gcpm = new GCMPushMessage($apiKey);
 $gcpm->setDevices($devices);
-$response = $gcpm->send($message);
+$response = $gcpm->send($message, array('title' => 'Test title'));
 ```
-
