@@ -25,10 +25,18 @@ class GCMPushMessage {
 	var $serverApiKey = "";
 	var $devices = array();
 	
+	/*
+		Constructor
+		@param $apiKeyIn the server API key
+	*/
 	function GCMPushMessage($apiKeyIn){
 		$this->serverApiKey = $apiKeyIn;
 	}
 
+	/*
+		Set the devices to send to
+		@param $deviceIds array of device tokens to send to
+	*/
 	function setDevices($deviceIds){
 	
 		if(is_array($deviceIds)){
@@ -39,7 +47,12 @@ class GCMPushMessage {
 	
 	}
 
-	function send($message){
+	/*
+		Send the message to the device
+		@param $message The message to send
+		@param $data Array of data to accompany the message
+	*/
+	function send($message, $data){
 		
 		if(!is_array($this->devices) || count($this->devices) == 0){
 			$this->error("No devices set");
@@ -54,6 +67,10 @@ class GCMPushMessage {
 			'data'              => array( "message" => $message ),
 		);
 		
+		foreach ($data as $key => $value) {
+			$fields['data'][$key] = $value;
+		}
+
 		$headers = array( 
 			'Authorization: key=' . $this->serverApiKey,
 			'Content-Type: application/json'
