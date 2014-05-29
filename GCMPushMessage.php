@@ -52,7 +52,7 @@ class GCMPushMessage {
 		@param $message The message to send
 		@param $data Array of data to accompany the message
 	*/
-	function send($message, $data){
+	function send($message, $data = false){
 		
 		if(!is_array($this->devices) || count($this->devices) == 0){
 			$this->error("No devices set");
@@ -67,10 +67,12 @@ class GCMPushMessage {
 			'data'              => array( "message" => $message ),
 		);
 		
-		foreach ($data as $key => $value) {
-			$fields['data'][$key] = $value;
+		if(is_array($data)){
+			foreach ($data as $key => $value) {
+				$fields['data'][$key] = $value;
+			}
 		}
-
+		
 		$headers = array( 
 			'Authorization: key=' . $this->serverApiKey,
 			'Content-Type: application/json'
