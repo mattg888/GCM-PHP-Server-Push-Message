@@ -20,3 +20,13 @@ $gcpm = new GCMPushMessage($apiKey);
 $gcpm->setDevices($devices);
 $response = $gcpm->send($message, array('title' => 'Test title'));
 ```
+
+How to obtain a Google Server API Key
+	- Go to the Google Console https://console.developers.google.com
+	- Create a new project / open project
+	- Click on 'APIs & Auth' on the left
+	- Find the 'Google Cloud Messaging for Android' option, and press off to turn it on
+	- Go to the creditials tab on the left
+	- Go the 'Public API access' section and click 'Create new key'
+	- Choose 'Server key' and click 'Create'
+	- The API key is now shown under the section 'Key for server applications'
