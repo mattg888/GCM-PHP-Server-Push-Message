@@ -20,8 +20,6 @@
 
 */
 
-namespace Google\GCM;
-
 class GCMPushMessage {
 
 	var $url = 'https://android.googleapis.com/gcm/send';
