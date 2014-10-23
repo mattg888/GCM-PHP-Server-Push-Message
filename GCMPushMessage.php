@@ -90,6 +90,10 @@ class GCMPushMessage {
 		
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, json_encode( $fields ) );
 		
+		// Avoids problem with https certificate
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
+		
 		// Execute post
 		$result = curl_exec($ch);
 		
