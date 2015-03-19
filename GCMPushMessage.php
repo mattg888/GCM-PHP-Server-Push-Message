@@ -52,6 +52,7 @@ class GCMPushMessage {
      * Send data to the device
      * @param string $message data for send
      * @param mixed $data (optional) array of data to accompany the message
+     * @return assoc array  ("body", "http_code")
      */
     public function send($message, $data = false) {
 
@@ -96,12 +97,13 @@ class GCMPushMessage {
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
 
         // Execute post
-        $result = curl_exec($ch);
-
+        $httpBody = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
         // Close connection
         curl_close($ch);
 
-        return $result;
+        return array("http_body" => $httpBody, "http_code" => $httpCode);
     }
 
     /**
