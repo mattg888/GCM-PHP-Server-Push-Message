@@ -52,9 +52,10 @@ class GCMPushMessage {
      * Send data to the device
      * @param string $message data for send
      * @param mixed $data (optional) array of data to accompany the message
+     * @param string $collapseKey (optional) collapse key for message
      * @return assoc array  ("body", "http_code")
      */
-    public function send($message, $data = false) {
+    public function send($message, $data = false, $collapseKey = null) {
 
         if (!is_array($this->devices) || count($this->devices) == 0) {
             $this->error("No devices set");
@@ -68,6 +69,10 @@ class GCMPushMessage {
                 'registration_ids'  => $this->devices,
                 'data'              => array( "message" => $message )
         );
+        
+        if (isset($collapseKey)) {
+            $fields["collapse_key"] = $collapseKey;
+        }
 
         if (is_array($data)) {
             foreach ($data as $key => $value) {
