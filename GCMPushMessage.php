@@ -29,7 +29,7 @@ class GCMPushMessage {
 		Constructor
 		@param $apiKeyIn the server API key
 	*/
-	function GCMPushMessage($apiKeyIn){
+	function __construct($apiKeyIn){
 		$this->serverApiKey = $apiKeyIn;
 	}
 
