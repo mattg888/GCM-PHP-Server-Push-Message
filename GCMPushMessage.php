@@ -19,17 +19,19 @@
 	http://stackoverflow.com/questions/11242743/gcm-with-php-google-cloud-messaging
 
 */
-class GCMPushMessage {
+class GCMPushMessage 
+{
 
-	var $url = 'https://android.googleapis.com/gcm/send';
-	var $serverApiKey = "";
-	var $devices = array();
+	private $url = 'https://android.googleapis.com/gcm/send';
+	private $serverApiKey = "";
+	private $devices = array();
 	
 	/*
 		Constructor
 		@param $apiKeyIn the server API key
 	*/
-	function GCMPushMessage($apiKeyIn){
+	public function __construct($apiKeyIn)
+	{
 		$this->serverApiKey = $apiKeyIn;
 	}
 
@@ -37,7 +39,8 @@ class GCMPushMessage {
 		Set the devices to send to
 		@param $deviceIds array of device tokens to send to
 	*/
-	function setDevices($deviceIds){
+	public function setDevices($deviceIds)
+	{
 	
 		if(is_array($deviceIds)){
 			$this->devices = $deviceIds;
@@ -52,7 +55,8 @@ class GCMPushMessage {
 		@param $message The message to send
 		@param $data Array of data to accompany the message
 	*/
-	function send($message, $data = false){
+	public function send($message, $data = false)
+	{
 		
 		if(!is_array($this->devices) || count($this->devices) == 0){
 			$this->error("No devices set");
@@ -103,7 +107,8 @@ class GCMPushMessage {
 		return $result;
 	}
 	
-	function error($msg){
+	private function error($msg)
+	{
 		echo "Android send notification failed with error:";
 		echo "\t" . $msg;
 		exit(1);
