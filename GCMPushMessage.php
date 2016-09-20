@@ -21,9 +21,12 @@
 */
 class GCMPushMessage {
 
-	var $url = 'https://android.googleapis.com/gcm/send';
-	var $serverApiKey = "";
-	var $devices = array();
+	// the URL of the GCM API endpoint
+	private $url = 'https://android.googleapis.com/gcm/send';
+	// the server API key - setup on class init
+	private $serverApiKey = "";
+	// array of devices to send to
+	private $devices = array();
 	
 	/*
 		Constructor
@@ -38,13 +41,11 @@ class GCMPushMessage {
 		@param $deviceIds array of device tokens to send to
 	*/
 	function setDevices($deviceIds){
-	
 		if(is_array($deviceIds)){
 			$this->devices = $deviceIds;
 		} else {
 			$this->devices = array($deviceIds);
 		}
-	
 	}
 
 	/*
@@ -55,11 +56,11 @@ class GCMPushMessage {
 	function send($message, $data = false){
 		
 		if(!is_array($this->devices) || count($this->devices) == 0){
-			$this->error("No devices set");
+			throw new GCMPushMessageArgumentException("No devices set");
 		}
 		
 		if(strlen($this->serverApiKey) < 8){
-			$this->error("Server API Key not set");
+			throw new GCMPushMessageArgumentException("Server API Key not set");
 		}
 		
 		$fields = array(
@@ -103,9 +104,15 @@ class GCMPushMessage {
 		return $result;
 	}
 	
-	function error($msg){
-		echo "Android send notification failed with error:";
-		echo "\t" . $msg;
-		exit(1);
-	}
 }
+
+class GCMPushMessageArgumentException extends Exception {
+    public function __construct($message, $code = 0, Exception $previous = null) {
+        parent::__construct($message, $code, $previous);
+    }
+
+    public function __toString() {
+        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+    }
+}
+
