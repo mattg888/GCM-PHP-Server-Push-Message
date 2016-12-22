@@ -25,9 +25,14 @@ How to obtain a Google Server API Key
 -----------------------
 -	Go to the Google Console https://console.developers.google.com
 -	Create a new project / open project
--	Click on 'APIs & Auth' on the left
--	Find the 'Google Cloud Messaging for Android' option, and press off to turn it on
--	Go to the creditials tab on the left
--	Go the 'Public API access' section and click 'Create new key'
--	Choose 'Server key' and click 'Create'
--	The API key is now shown under the section 'Key for server applications'
+
+Enable the API
+-	Click 'ENABLE API' (blue top button)
+-	Search for 'Google Cloud Messaging', click the link and click 'ENABLE'
+
+Get a server API key
+-	Go to https://console.firebase.google.com and select your project your created in the Google console
+-	Click the cog icon on the left and click 'Project settings'
+-	Go to the 'CLOUD MESSAGING' tab
+-	Your server API key will be listed here (for use with this class)
+-	Your sender ID (for use within your app) will also be listed here
